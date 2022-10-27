@@ -1,5 +1,6 @@
 const toDoList = document.querySelector("#todo-list");
 const url = "http://localhost:3000/todos";
+let data;
 
 function fetch_todos() {
   fetch(url)
@@ -12,6 +13,7 @@ function fetch_todos() {
     });
 }
 function render_todos(data) {
+  toDoList.innerHTML = "";
   data.forEach((task) => {
     const li = document.createElement("li");
     li.innerText = task.title;
@@ -23,11 +25,7 @@ function render_todos(data) {
     deleteBtn.addEventListener("click", () => {
       deleteTask(data, task);
     });
-    if (task.completed === true) {
-      li.setAttribute("class", "completed");
-    } else {
-      li.setAttribute("class", "incompleted");
-    }
+    styleByStatus(li, task);
   });
 }
 
@@ -75,10 +73,12 @@ function deleteTask(data, task) {
     .then((response) => {
       return response.json();
     })
-    .then((data) => {
-      const updatedTodos = data.filter((task) => {
-        return task.id !== task.id;
-      });
-      data = updatedTodos;
+    .then((res) => {
+      fetch_todos();
     });
+}
+function styleByStatus(li, task) {
+  if (task.completed === true) {
+    li.setAttribute("class", "completed");
+  }
 }
