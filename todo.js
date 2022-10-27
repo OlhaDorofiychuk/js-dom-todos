@@ -82,11 +82,3 @@ function deleteTask(data, task) {
       data = updatedTodos;
     });
 }
-function styleByStatus(data) {
-  const li = document.querySelector("li");
-  data.forEach((task) => {
-    if (data.completed === true) {
-      li.setAttribute("class", "completed");
-    } else return;
-  });
-}
