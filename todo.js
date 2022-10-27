@@ -80,5 +80,5 @@ function deleteTask(data, task) {
 function styleByStatus(li, task) {
   if (task.completed === true) {
     li.setAttribute("class", "completed");
-  }
+  } else li.setAttribute("class", "incomplete");
 }
